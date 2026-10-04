@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>甜甜 · 六年升学作战看板（7–12 年级）</title>
+<style>
+:root{
+  --bg:#f6f7f5; --card:#ffffff; --line:rgba(0,0,0,.10); --line2:rgba(0,0,0,.18);
+  --ink:#1d1d1b; --ink2:#5c5c57; --ink3:#8a8a83;
+  --blue:#185fa5; --blue-bg:#e8f1fb; --blue-line:#85b7eb;
+  --amber:#8a5006; --amber-bg:#fbefd9; --amber-line:#ef9f27;
+  --teal:#0f6e56; --teal-bg:#e3f5ef; --teal-line:#5dcaa5;
+  --purple:#3c3489; --purple-bg:#eeedfe; --purple-line:#b3adf0;
+  --red:#a32d2d; --red-bg:#fcebeb; --red-line:#e8a0a0;
+  --gray-bg:#f1efe8; --gray-line:#cfccc2;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p{margin:0}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px 90px}
+.muted{color:var(--ink2)}
+.small{font-size:12.5px;color:var(--ink2)}
+.xs{font-size:11.5px;color:var(--ink3)}
+b,strong{font-weight:600}
+
+/* ---------- hero ---------- */
+header.hero{background:var(--card);border-bottom:1px solid var(--line)}
+.hero-in{max-width:1180px;margin:0 auto;padding:24px 24px 20px}
+h1{font-size:23px;font-weight:600;letter-spacing:-.01em}
+.hero-sub{color:var(--ink2);font-size:13.5px;margin-top:5px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.chip{background:var(--gray-bg);border-radius:7px;padding:5px 10px;font-size:12.5px;color:var(--ink2)}
+.chip b{font-weight:600;color:var(--ink)}
+.chip.hot{background:var(--amber-bg);color:var(--amber)}
+.chip.ok{background:var(--teal-bg);color:var(--teal)}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:30;background:rgba(246,247,245,.94);
+  backdrop-filter:saturate(180%) blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:1180px;margin:0 auto;padding:9px 24px}
+.nav-row{display:flex;gap:6px;flex-wrap:wrap}
+nav a{font-size:13px;color:var(--ink2);padding:5px 11px;border-radius:7px;border:1px solid transparent;white-space:nowrap}
+nav a:hover{background:var(--card);border-color:var(--line)}
+nav a.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.nav-row.sub{margin-top:6px;padding-top:6px;border-top:1px dashed var(--line2)}
+.nav-row.sub a{font-size:12.5px;color:var(--ink3);padding:3px 9px}
+.nav-row.sub a:hover{color:var(--ink)}
+
+/* ---------- zone ---------- */
+section[data-zone]{margin-top:46px;scroll-margin-top:96px}
+.zone-head{display:flex;align-items:baseline;gap:12px;padding-bottom:9px;border-bottom:2px solid var(--ink);margin-bottom:18px}
+.zone-head .zn{font-size:11.5px;letter-spacing:.1em;color:var(--ink3);font-weight:600}
+.zone-head h2{font-size:19px;font-weight:600}
+.zone-head .zd{margin-left:auto;font-size:12.5px;color:var(--ink2)}
+.panel{margin-bottom:18px;scroll-margin-top:130px}
+.panel h3{font-size:15px;font-weight:600;margin-bottom:3px}
+.panel .lead{font-size:12.5px;color:var(--ink2);margin-bottom:12px}
+
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:980px){.grid4,.grid3,.grid2{grid-template-columns:1fr}}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.card.top-b{border-top:3px solid var(--blue)}
+.card.top-a{border-top:3px solid var(--amber)}
+.card.top-t{border-top:3px solid var(--teal)}
+.card.top-p{border-top:3px solid var(--purple)}
+.card.top-r{border-top:3px solid var(--red)}
+.card.flat{background:var(--gray-bg);border-color:transparent}
+
+/* ---------- stat ---------- */
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 14px}
+.stat .lb{font-size:12px;color:var(--ink2)}
+.stat .vl{font-size:26px;font-weight:600;line-height:1.25;letter-spacing:-.02em}
+.stat .vl small{font-size:13px;font-weight:500;color:var(--ink2)}
+.stat .ft{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.stat.good .vl{color:var(--teal)}
+.stat.warn .vl{color:var(--amber)}
+.stat.bad .vl{color:var(--red)}
+
+/* ---------- conclusion ---------- */
+.concl{display:flex;gap:13px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px 16px}
+.concl .n{flex:none;width:26px;height:26px;border-radius:8px;background:var(--ink);color:#fff;
+  font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center}
+.concl .n.a{background:var(--amber)}.concl .n.t{background:var(--teal)}.concl .n.p{background:var(--purple)}.concl .n.r{background:var(--red)}
+.concl .tt{font-size:14.5px;font-weight:600;margin-bottom:3px}
+.concl .bd{font-size:13px;color:var(--ink2)}
+
+/* ---------- fold ---------- */
+details.fold{border:1px solid var(--line);border-radius:9px;background:var(--card);margin-top:10px}
+details.fold>summary{cursor:pointer;list-style:none;padding:8px 12px;font-size:12.5px;color:var(--ink2);
+  display:flex;align-items:center;gap:8px;user-select:none}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"▸";font-size:9px;color:var(--ink3);transition:transform .15s}
+details.fold[open]>summary::before{transform:rotate(90deg)}
+details.fold[open]>summary{color:var(--ink);border-bottom:1px solid var(--line)}
+details.fold>summary:hover{color:var(--ink)}
+details.fold .fb{padding:11px 12px 12px}
+
+/* ---------- table ---------- */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--ink2);font-size:12px;background:var(--gray-bg)}
+tr:last-child td{border-bottom:none}
+table.tight td,table.tight th{padding:6px 9px}
+.num{font-variant-numeric:tabular-nums}
+.up{color:var(--red)}.dn{color:var(--teal)}
+
+/* ---------- misc ---------- */
+ul.none{list-style:none;margin:0;padding:0}
+ul.none li{margin-bottom:7px}
+ul.tight{margin:0;padding-left:16px}
+ul.tight li{margin-bottom:4px}
+.key{border-left:3px solid var(--teal);padding-left:11px;font-size:13px;color:var(--ink2)}
+.warn{border-left:3px solid var(--red);background:var(--red-bg);padding:10px 13px;border-radius:0 8px 8px 0;font-size:13px}
+.note{border-left:3px solid var(--amber-line);background:var(--amber-bg);padding:10px 13px;border-radius:0 8px 8px 0;font-size:13px}
+.ok-box{border-left:3px solid var(--teal-line);background:var(--teal-bg);padding:10px 13px;border-radius:0 8px 8px 0;font-size:13px}
+.pill{display:inline-block;font-size:11.5px;border-radius:6px;padding:1px 7px;margin:0 5px 5px 0}
+.p-a{background:var(--red-bg);color:var(--red)}
+.p-b{background:var(--amber-bg);color:var(--amber)}
+.p-c{background:var(--gray-bg);color:var(--ink2)}
+.p-t{background:var(--teal-bg);color:var(--teal)}
+.p-p{background:var(--purple-bg);color:var(--purple)}
+.p-bl{background:var(--blue-bg);color:var(--blue)}
+.meter{height:7px;background:var(--gray-bg);border-radius:4px;overflow:hidden;margin:5px 0 2px}
+.meter i{display:block;height:100%;border-radius:4px;background:var(--blue-line)}
+.meter i.hi{background:var(--teal-line)}
+.meter i.lo{background:var(--amber-line)}
+.meter i.pu{background:var(--purple-line)}
+td.yr{background:var(--gray-bg);vertical-align:top}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:middle}
+
+/* ---------- check list ---------- */
+.done{display:flex;gap:9px;align-items:flex-start;margin-bottom:8px}
+.done input{margin-top:4px;width:15px;height:15px;flex:none;accent-color:var(--teal)}
+.done label{font-size:13.5px;line-height:1.6}
+.done label span{display:block;color:var(--ink3);font-size:12.5px}
+.done.d label{text-decoration:line-through;color:var(--ink3)}
+
+/* ---------- week grid ---------- */
+.wk{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+@media(max-width:1000px){.wk{grid-template-columns:repeat(2,1fr)}}
+.day{border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:var(--card);min-height:158px}
+.day.rest{background:var(--gray-bg)}
+.day h4{margin:0 0 7px;font-size:13px;font-weight:600}
+.day h4 em{font-style:normal;float:right;font-size:11px;color:var(--ink3);font-weight:400}
+.blk{display:block;font-size:11.5px;line-height:1.5;border-radius:6px;padding:4px 7px;margin-bottom:5px}
+.blk b{font-weight:600}
+.blk em{font-style:normal;display:block;font-size:10.5px;opacity:.72}
+.b-en{background:var(--amber-bg)}.b-ma{background:var(--blue-bg)}.b-ip{background:var(--purple-bg)}
+.b-cn{background:var(--gray-bg)}.b-fr{background:var(--teal-bg)}
+
+/* ---------- funnel ---------- */
+.funnel{display:flex;flex-direction:column;align-items:center;gap:5px;margin:6px 0 10px}
+.fn-row{height:34px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-size:12.5px;font-weight:600;color:#fff;text-align:center;padding:0 8px}
+.fn-row span{font-weight:400;font-size:11px;opacity:.85;display:block}
+
+/* ---------- stepper ---------- */
+.step{display:flex;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line2)}
+.step:last-child{border-bottom:none}
+.step .gd{flex:none;width:52px;font-size:12px;font-weight:600;color:var(--ink2);padding-top:2px}
+.step .ct{flex:1}
+.step .ct b{font-size:13.5px}
+.step .ct p{font-size:12.5px;color:var(--ink2)}
+
+footer{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink3)}
+svg text{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB",sans-serif}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <h1>甜甜 · 六年升学作战看板</h1>
+    <p class="hero-sub">Jane Lathrop Stanford Middle School → Gunn High School ｜ 目标：藤校 + Top 15–20（其余同档保底）｜ 制定于 2026 年 10 月</p>
+    <div class="chips">
+      <span class="chip"><b>当前</b> 7 年级 · 12 岁 · 2026–27 学年</span>
+      <span class="chip"><b>申请季</b> 2031 年秋（Class of 2032）</span>
+      <span class="chip"><b>身份</b> 绿卡 · 国内生池</span>
+      <span class="chip"><b>长板主线</b> 原创 IP 产品化</span>
+      <span class="chip hot"><b>最大变量</b> 自我驱动力</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-row" id="nav1">
+      <a href="#A">A · 决策摘要</a>
+      <a href="#B">B · 自身评估</a>
+      <a href="#C">C · 目标与六年路径</a>
+      <a href="#D">D · 学期执行</a>
+      <a href="#E">E · 长板引擎</a>
+      <a href="#F">F · 规则与清单</a>
+    </div>
+    <div class="nav-row sub" id="nav2"></div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<section data-zone="A" id="A">
+  <div class="zone-head"><span class="zn">ZONE A</span><h2>决策摘要</h2><p class="zd">三分钟看完：现状数据、四条结论、本学期三件事</p></div>
+
+  <div class="panel" id="a1">
+    <h3>现状仪表盘</h3>
+    <p class="lead">数据来自加州官方成绩报告（2026 年春，六年级，Palo Alto Unified — JLS）。两科指向完全相反的处方。</p>
+    <div class="grid4" style="margin-bottom:14px">
+      <div class="stat good"><div class="lb">数学 · SBAC</div><div class="vl">2780 <small>Level 4</small></div><div class="ft">六年级分数区间为 2235–2780，<b>她落在区间上限</b>；校均 2648、州均 2501</div></div>
+      <div class="stat bad"><div class="lb">英语 · SBAC</div><div class="vl">2605 <small>Level 3</small></div><div class="ft">校均 2619、州均 2516。<b>低于本校平均 14 分</b>，且较五年级掉了一级</div></div>
+      <div class="stat warn"><div class="lb">每周可自主支配</div><div class="vl">≈3 <small>小时</small></div><div class="ft">家教每天约 2 小时另计。总量很小，所以只能重排、不能堆叠</div></div>
+      <div class="stat"><div class="lb">距离申请季</div><div class="vl">5 <small>年</small></div><div class="ft">2031 年秋递交（Class of 2032）。够长，但也意味着<b>只有英语不能等</b></div></div>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <svg viewBox="0 0 680 205" width="100%" role="img" aria-label="双科分数对比条形图">
+          <text x="0" y="14" font-size="12.5" font-weight="600" fill="#1d1d1b">英语 ELA ｜ 分数区间 2230–2770</text>
+          <rect x="52" y="26" width="387" height="16" rx="3" fill="#ef9f27"/>
+          <text x="44" y="38" font-size="11" fill="#5c5c57" text-anchor="end">她</text>
+          <text x="445" y="38" font-size="11" font-weight="600" fill="#8a5006">2605</text>
+          <rect x="52" y="48" width="402" height="16" rx="3" fill="#f1efe8"/>
+          <text x="44" y="60" font-size="11" fill="#5c5c57" text-anchor="end">校均</text>
+          <text x="460" y="60" font-size="11" fill="#8a8a83">2619</text>
+          <rect x="52" y="70" width="295" height="16" rx="3" fill="#f1efe8"/>
+          <text x="44" y="82" font-size="11" fill="#5c5c57" text-anchor="end">州均</text>
+          <text x="353" y="82" font-size="11" fill="#8a8a83">2516</text>
+          <path d="M458 26 L458 86" stroke="#a32d2d" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <text x="462" y="99" font-size="10.5" fill="#a32d2d">校均线 2619：她在红线左侧</text>
+
+          <text x="0" y="128" font-size="12.5" font-weight="600" fill="#1d1d1b">数学 ｜ 分数区间 2235–2780</text>
+          <rect x="52" y="140" width="568" height="16" rx="3" fill="#185fa5"/>
+          <text x="44" y="152" font-size="11" fill="#5c5c57" text-anchor="end">她</text>
+          <text x="612" y="152" font-size="11" font-weight="600" fill="#ffffff" text-anchor="end">2780</text>
+          <rect x="52" y="162" width="432" height="16" rx="3" fill="#f1efe8"/>
+          <text x="44" y="174" font-size="11" fill="#5c5c57" text-anchor="end">校均</text>
+          <text x="490" y="174" font-size="11" fill="#8a8a83">2648</text>
+          <rect x="52" y="184" width="280" height="16" rx="3" fill="#f1efe8"/>
+          <text x="44" y="196" font-size="11" fill="#5c5c57" text-anchor="end">州均</text>
+          <text x="338" y="196" font-size="11" fill="#8a8a83">2501</text>
+          <path d="M620 134 L620 204" stroke="#0f6e56" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <text x="524" y="196" font-size="10.5" fill="#0f6e56" text-anchor="end">↑ 本年级满分线</text>
+        </svg>
+        <p class="small" style="margin-top:6px"><b>读法：两条曲线的形状相反。</b>数学已达到本年级能测得的最高值，继续加课时只会提高"正确率"这一个已经很高的指标；英语唯一的落后项被精确定位在输入侧，而输入恰恰无法突击。</p>
+      </div>
+
+      <div class="card">
+        <svg viewBox="0 0 680 205" width="100%" role="img" aria-label="四至六年级分数趋势图">
+          <text x="0" y="13" font-size="12.5" font-weight="600" fill="#1d1d1b">四年趋势：两科在 5→6 年级分岔</text>
+          <g stroke="#e3e1d9" stroke-width="1">
+            <path d="M46 172 H640"/><path d="M46 123 H640"/><path d="M46 75 H640"/><path d="M46 26 H640"/>
+          </g>
+          <g font-size="10" fill="#8a8a83" text-anchor="end">
+            <text x="40" y="175">2500</text><text x="40" y="126">2600</text><text x="40" y="78">2700</text><text x="40" y="29">2800</text>
+          </g>
+          <g font-size="11.5" fill="#5c5c57" text-anchor="middle">
+            <text x="90" y="192">四年级</text><text x="240" y="192">五年级</text><text x="390" y="192">六年级</text>
+          </g>
+          <polyline points="90,110 240,108 390,36" fill="none" stroke="#185fa5" stroke-width="2.4"/>
+          <g fill="#185fa5">
+            <circle cx="90" cy="110" r="4"/><circle cx="240" cy="108" r="4"/><circle cx="390" cy="36" r="4.5"/>
+          </g>
+          <g font-size="10" fill="#185fa5" text-anchor="middle">
+            <text x="90" y="102">2627</text><text x="240" y="100">2632</text><text x="390" y="28">2780</text>
+          </g>
+          <polyline points="90,154 240,108 390,121" fill="none" stroke="#ef9f27" stroke-width="2.4" stroke-dasharray="5 3"/>
+          <g fill="#ef9f27">
+            <circle cx="90" cy="154" r="4"/><circle cx="240" cy="108" r="4"/><circle cx="390" cy="121" r="4.5"/>
+          </g>
+          <g font-size="10" fill="#8a5006" text-anchor="middle">
+            <text x="90" y="146">2537</text><text x="240" y="100">2632</text><text x="390" y="139">2605</text>
+          </g>
+          <g font-size="11.5">
+            <rect x="472" y="30" width="11" height="3" fill="#185fa5"/><text x="490" y="36" fill="#185fa5">数学：+148，稳在 Level 4</text>
+            <rect x="472" y="52" width="11" height="3" fill="#ef9f27"/><text x="490" y="58" fill="#8a5006">英语：−27，从 L4 掉到 L3</text>
+          </g>
+          <text x="472" y="86" font-size="11" fill="#a32d2d">同一年，两科走了反方向</text>
+          <text x="472" y="102" font-size="10.5" fill="#5c5c57">↑ 达标线逐年抬高，</text>
+          <text x="472" y="117" font-size="10.5" fill="#5c5c57">维持同一 Level 需要更高分数。</text>
+          <text x="472" y="133" font-size="10.5" fill="#5c5c57">她不是退步，是<b>没跟上提速</b>，</text>
+          <text x="472" y="148" font-size="10.5" fill="#5c5c57">而同龄同伴整体提速了。</text>
+        </svg>
+        <p class="small" style="margin-top:6px"><b>这条曲线是本轮最重要的发现。</b>掉级发生在五年级到六年级这一年，说明问题不是"不会"，而是<b>输入量没有随年级难度同步增长</b>——这正是必须从七年级立刻开始补的原因。</p>
+      </div>
+    </div>
+
+    <details class="fold">
+      <summary>展开数据明细：分项表现 · 作文评分 · Lexile / Quantile · 读法说明</summary>
+      <div class="fb">
+        <table class="tight">
+          <tr><th style="width:120px">报告项</th><th style="width:32%">结果</th><th>含义</th></tr>
+          <tr><td><b>数学 · 分项</b></td><td>概念与程序 <b>Above Proficient</b><br>数学实践 <b>Above Proficient</b></td><td>两项都在"高于熟练"，<b>数学没有任何需要抢救的地方</b></td></tr>
+          <tr><td><b>英语 · 分项</b></td><td>写作与研究 <b>Above Proficient</b><br>阅读与听力 <b>At or Near Proficient</b></td><td><b>瓶颈被精确定位：不在输出，在输入。</b>她写得比读得强</td></tr>
+          <tr><td><b>作文评分</b></td><td>组织与目的 <b>3/4</b> · 论据与展开 <b>3/4</b> · 规范 <b>2/2 满分</b></td><td>结构与语法已过关，<b>差距在论证纵深与词汇精确度</b></td></tr>
+          <tr><td><b>阅读 / 数学指标</b></td><td>Lexile <b>1115L</b> · Quantile <b>1200Q</b></td><td>Lexile 高于六年级常见区间上限，说明<b>理解力没问题，是广度与词汇量不足</b></td></tr>
+        </table>
+        <p class="key" style="margin-top:10px">三条读法原则：① <b>单次分数不作终审</b>，但足以推翻"数学弱、写作弱"的旧假设；② <b>分项比总分有用</b>——总分说"英语不好"，分项说"是输入不好"；③ 五年级到六年级的那道折线，比任何一个分数都重要。</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="panel" id="a2">
+    <h3>四条核心结论</h3>
+    <p class="lead">全部由此次评估推出。结论先行，依据与细则折叠在下。</p>
+    <div class="grid2">
+      <div class="concl">
+        <div class="n a">1</div>
+        <div>
+          <div class="tt">英语输入是一号工程，且本学期不可延期</div>
+          <div class="bd">她是两个现象同时存在：数学读到区间满分，英语低于本校平均 14 分。<b>所有投入里，只有词汇量与阅读广度没法后补</b>——写作可以明年练、数学可以追难度、IP 可以换形态。</div>
+          <details class="fold"><summary>展开依据与做法</summary><div class="fb">
+            <ul class="tight"><li>依据：ELA 2605/Level 3 vs 校均 2619；分项"阅读与听力"仅 At or Near Proficient；4→6 年级曲线在五年级见顶后回落。</li><li>做法：每天 30 分钟自选阅读 + 每周一次 35 分钟非虚构精读（Newsela / CommonLit 可调 Lexile 并带批注）。</li><li>目标：本学期 8–10 本书，Lexile 向 1200L 移动。</li></ul>
+          </div></details>
+        </div>
+      </div>
+      <div class="concl">
+        <div class="n t">2</div>
+        <div>
+          <div class="tt">数学不是短板，家教的角色必须重排</div>
+          <div class="bd">区级评测 2780 = 六年级能测得的最高值，说明<b>瓶颈从来不是听不懂</b>。继续"讲一遍 + 陪做题"是把时间投在收益最小处，还会强化"学习＝有人陪着做的任务"。</div>
+          <details class="fold"><summary>展开：家教该做什么、不该做什么</summary><div class="fb">
+            <p class="small" style="margin-bottom:6px"><b>不该做：</b>推进校内进度、陪做作业、重复讲解已会的内容。<br><b>该做：</b>每周 2 次英语精读与写作反馈（她最需要有人对话的一块）+ 每周 1 次数学讲题与难题（练表达、练英文术语）。</p>
+            <p class="small">若涉及合约或人情，可先改<b>内容</b>、寒假再改<b>时长</b>。目标是 ≤5 小时/周，省下的时间还给 IP 与空白。</p>
+          </div></details>
+        </div>
+      </div>
+      <div class="concl">
+        <div class="n p">3</div>
+        <div>
+          <div class="tt">长板＝原创 IP 产品化，所有权必须归她</div>
+          <div class="bd">她明确不打算把画画当职业，也不教画、不接定制。所以路线不是"出售手艺"，而是<b>积累一项可被拥有、确权、复利的资产</b>——做"拥有一个 IP 的人"，而不是"画画的孩子"。</div>
+          <details class="fold"><summary>展开：为什么这样反而更有说服力</summary><div class="fb">
+            <ul class="tight"><li>纯美术评分主观，而"有无他人买单 / 使用 / 引用"是硬事实。</li><li>IP 的三层证据可量化：内容层（更新连续性、受众）→ 商业层（GMV、复购）→ 资产层（版权登记、商标、授权）。</li><li>三层齐了才叫 IP 成立；只有前两层叫生意做得不错。</li></ul>
+          </div></details>
+        </div>
+      </div>
+      <div class="concl">
+        <div class="n r">4</div>
+        <div>
+          <div class="tt">这条路的成败取决于内驱力，不取决于资源</div>
+          <div class="bd">预算不设限是好条件，但——<b>钱买不到长板</b>。付费科研、打包式背景提升、买奖项，招生官一眼看穿，且是减分项。她现在真正稀缺的是"愿意为一件事情较真"。</div>
+          <details class="fold"><summary>展开：钱该花在哪、不该花在哪</summary><div class="fb">
+            <p class="small"><b>值得：</b>好老师（数字艺术 1 对 1）、正版软件与硬件、高质量夏校（10–11 年级）、11 年级的选校与文书顾问。<br><b>不值得：</b>背景提升套餐、买奖项、买科研、任何承诺产出成果的项目、私校学费（Gunn 的资源对得起这个学区）。</p>
+          </div></details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="a3">
+    <h3>本学期只要做三件事</h3>
+    <p class="lead">时间很紧、执行意愿偏低，所以本轮<b>只推三条</b>。其余（压缩家教时长、数学降量、赛事布局）留到寒假。</p>
+    <div class="grid3">
+      <div class="card top-a">
+        <div class="pill p-a">优先级最高</div>
+        <h3>① 把英语时间变成有效剂量</h3>
+        <p class="small" style="margin:6px 0 8px"><b>改什么：</b>周二至周五的「英语 30 分钟」，从无定义的 30 分钟，改成<br>· 每天 <b>35 分钟连续阅读</b>（她自选的书）<br>· 周三那次换成 <b>Newsela 精读 + 批注</b></p>
+        <p class="small"><b>为什么：</b>这是唯一低于校均、且只能靠时间堆出来的科目。</p>
+      </div>
+      <div class="card top-p">
+        <div class="pill p-p">长板启动</div>
+        <h3>② 周六上午锁定为 IP 主块</h3>
+        <p class="small" style="margin:6px 0 8px"><b>做什么：</b>每周 60–90 分钟，只做一件事——把一或两个原创角色做到<b>能给别人看</b>的程度。<br>每天另加 15 分钟 sketchbook。</p>
+        <p class="small"><b>边界：</b>不谈开店、不谈赚钱、不做定制 Drawing。今年只到"被陌生人看见"为止。</p>
+      </div>
+      <div class="card top-t">
+        <div class="pill p-t">保执行</div>
+        <h3>③ 加两个保执行的机制</h3>
+        <p class="small" style="margin:6px 0 8px"><b>补做日：</b>周六留 30 分钟处理本周漏勾，做不完就勾"放弃"，<b>不顺延成债务</b>。<br><b>进度可视化：</b>43 个 Day 做成贴墙格子图。</p>
+        <p class="small"><b>为什么：</b>她敢跟陌生人开口＝需要观众；可视化是让她自己当自己的观众。</p>
+      </div>
+    </div>
+    <div class="warn" style="margin-top:14px"><b>一条贯穿全部的红线：</b>永远不要用"这对申请有用"去推动她。这套逻辑一旦被她识破，连她唯一可能自发投入的那条线也会熄灭。跟她说话只需要一句——<b>「你想做点自己的东西吗？你自己说了算。」</b></div>
+  </div>
+</section>
+
+<section data-zone="B" id="B">
+  <div class="zone-head"><span class="zn">ZONE B</span><h2>自身评估</h2><p class="zd">所有路线从这里推导 — 无数据不打分的几个维度，仍标记为未知</p></div>
+
+  <div class="panel" id="b1">
+    <h3>八维画像：优势与短板不在同一个方向上</h3>
+    <p class="lead">评分为 1–5。<span class="dot" style="background:var(--gray-line)"></span>外圈＝5 分满分。<b>看形状，不看平均分</b>——形状偏的一侧才是要管的那一侧。</p>
+    <div class="grid2">
+      <div class="card">
+        <svg viewBox="0 0 480 350" width="100%" role="img" aria-label="八维能力雷达图">
+          <g fill="none" stroke="#e3e1d9" stroke-width="1">
+            <circle cx="240" cy="185" r="24"/><circle cx="240" cy="185" r="48"/><circle cx="240" cy="185" r="72"/>
+            <circle cx="240" cy="185" r="96"/><circle cx="240" cy="185" r="120"/>
+          </g>
+          <g stroke="#e3e1d9" stroke-width="1">
+            <path d="M240 65 L240 305"/><path d="M324.9 100.1 L155.1 269.9"/><path d="M360 185 L120 185"/><path d="M324.9 269.9 L155.1 100.1"/>
+          </g>
+          <polygon points="240,98.6 284.1,140.9 312,185 318.1,263.1 240,281 185.7,239.3 192,185 180.6,125.6"
+                   fill="#185fa5" fill-opacity="0.16" stroke="#185fa5" stroke-width="2"/>
+          <g fill="#185fa5">
+            <circle cx="240" cy="98.6" r="3.6"/><circle cx="284.1" cy="140.9" r="3.6"/><circle cx="312" cy="185" r="3.6"/>
+            <circle cx="318.1" cy="263.1" r="3.6"/><circle cx="240" cy="281" r="3.6"/><circle cx="185.7" cy="239.3" r="3.6"/>
+            <circle cx="192" cy="185" r="3.6"/><circle cx="180.6" cy="125.6" r="3.6"/>
+          </g>
+          <g font-size="11.5" fill="#5c5c57">
+            <text x="240" y="47" text-anchor="middle">学业基础</text>
+            <text x="337" y="87" text-anchor="start">英语输入 <tspan fill="#a32d2d" font-weight="600">2.6</tspan></text>
+            <text x="378" y="189" text-anchor="start">英语写作</text>
+            <text x="337" y="283" text-anchor="start">数学 <tspan fill="#0f6e56" font-weight="600">4.6</tspan></text>
+            <text x="240" y="325" text-anchor="middle">艺术天赋</text>
+            <text x="142" y="283" text-anchor="end">商业直觉</text>
+            <text x="102" y="189" text-anchor="end">执行习惯 <tspan fill="#a32d2d" font-weight="600">2.0</tspan></text>
+            <text x="142" y="87" text-anchor="end">社交 / 领导力</text>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <div class="card" style="margin-bottom:12px">
+          <h3>这张图的三个读法</h3>
+          <ul class="none" style="margin-top:8px">
+            <li><b>① 右侧突出、左侧塌陷。</b>数学 4.6 与英语输入 2.6 在同一张图上相差两个档位——这是<b>数据差距，不是感觉差距</b>。</li>
+            <li><b>② 最低点在「执行习惯」2.0。</b>它不直接伤害任何一科，但决定了前面所有投入的转化率。所有计划都必须为它留出退出窗口。</li>
+            <li><b>③ 艺术天赋 4.0 是可用的杠杆，但不能当支点。</b>她不认同"画画"这个身份标签，所以艺术做<b>供给侧</b>、IP 做<b>资产侧</b>，两者咬合成一条长板。</li>
+          </ul>
+        </div>
+        <div class="key">评分说明：实心结论必须有<b>已确认的事实</b>支撑。睡眠时长、家庭语言环境、兄弟姐妹、是否 IEP/504 等维度<b>仍为未知</b>，不参与任何决策。</div>
+      </div>
+    </div>
+
+    <details class="fold">
+      <summary>展开八维明细表（含评分依据）</summary>
+      <div class="fb">
+        <table class="tight">
+          <tr><th style="width:110px">维度</th><th style="width:70px">评分</th><th style="width:40%">评分依据</th><th>对路线的含义</th></tr>
+          <tr><td><b>学业基础</b></td><td class="num">3.6 / 5</td><td>多数科目 A / A−，去年数学为 B；PAUSD 强学区</td><td>够作底座，不是敲门砖。<b>GPA 真战场从 9 年级开始</b></td></tr>
+          <tr><td><b>英语输入</b></td><td class="num">2.6 / 5</td><td>SBAC ELA 2605 / Level 3，低于校均 14 分；阅读与听力仅 At or Near Proficient</td><td><b>一号工程。</b>Lexile 1115L 说明理解力没问题，差距在输入量与体裁广度</td></tr>
+          <tr><td><b>英语写作</b></td><td class="num">3.0 / 5</td><td>作文组织 3/4、论据 3/4、<b>规范 2/2 满分</b>；正式欠缺真实产出</td><td>不是"写不对"，是"写得不够多、不够深"。与 IP 项目的故事线合并练</td></tr>
+          <tr><td><b>数学</b></td><td class="num">4.6 / 5</td><td>SBAC 2780 / Level 4，<b>六年级分数区间上限</b>；两个分项均 Above Proficient</td><td>不需要补。<b>任务改为难度 + 交付 + 英文表达</b></td></tr>
+          <tr><td><b>艺术天赋</b></td><td class="num">4.0 / 5</td><td>自学动漫，无人要求时也画；家长与外部环境一致认可</td><td>做供给侧与护城河，<b>不当主菜</b></td></tr>
+          <tr><td><b>商业直觉</b></td><td class="num">3.2 / 5</td><td>对钱敏感、聪明；尚无真实交易验证</td><td>需在 8 年级末拿到验证：自发找客户 / 陌生人付款 / 是否倒逼她学数学</td></tr>
+          <tr><td><b>执行习惯</b></td><td class="num">2.0 / 5</td><td>作业以最低标准完成；回避额外 effort；武术抗拒比赛</td><td><b>最大的转化损耗。</b>处方不是纪律要求，而是反馈闭环</td></tr>
+          <tr><td><b>社交 / 领导力</b></td><td class="num">3.5 / 5</td><td>家长观察：不怯场，敢主动跟陌生人开口</td><td><b>"敢开口"不再是限制条件</b> → 线下市集 / JA Company Program 可直接走</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="panel" id="b2">
+    <h3>已确认的优势 vs 风险</h3>
+    <p class="lead">只列已经验证过的，不列猜测项。</p>
+    <div class="grid2">
+      <div class="card top-t">
+        <h3>五项优势</h3>
+        <ul class="none" style="margin-top:8px">
+          <li><b>数学达到本年级能测得的最高值</b> —— 2780 / Level 4，且五年级到六年级仍 +148 分</li>
+          <li><b>语法与书面规范过关</b> —— 作文规范项满分，这在二年级来美的孩子里不多见</li>
+          <li><b>艺术存在自发投入</b> —— 没人要求也画，这是稀缺的内驱信号</li>
+          <li><b>敢主动跟陌生人开口</b> —— 解锁了线下市场这条反馈最快的路径</li>
+          <li><b>学区与家庭支持到位</b> —— Gunn 资源好、接送无忧、预算不设限</li>
+        </ul>
+      </div>
+      <div class="card top-r">
+        <h3>五项风险</h3>
+        <ul class="none" style="margin-top:8px">
+          <li><b>英语整体输入低于本校平均</b> —— 且 5→6 年级已经掉过一级，趋势不利</li>
+          <li><b>执行习惯 2.0</b> —— 所有投入的转化率受损，且不靠报班能解决</li>
+          <li><b>每天 2 小时家教的用途错位</b> —— 数学已满分却仍在"补数学"</li>
+          <li><b>日程里没有长板的位置</b> —— 43 个学习日，零天留给 IP</li>
+          <li><b>申请池最挤</b> —— 亚裔 + 加州公立 + PAUSD，"优秀但没有记忆点"不够</li>
+        </ul>
+      </div>
+    </div>
+    <details class="fold">
+      <summary>展开：可复用的评估模板（四步）与待求证清单</summary>
+      <div class="fb">
+        <p class="small" style="margin-bottom:8px"><b>评估模板四步：</b>① 采数据（统考报告 / 成绩单 / 作品 / 第三方评价）→ ② 打多维分（按本表的八个维度，<b>无数据就标"未知"</b>，不用印象填空）→ ③ 找最大变化项（不找平均分最高的，找趋势在恶化的）→ ④ 过检验点（每个学年末复盘，允许降级与换线）。</p>
+        <table class="tight">
+          <tr><th style="width:52px">级别</th><th style="width:38%">待求证项</th><th>它会改写什么</th><th style="width:76px">状态</th></tr>
+          <tr><td><span class="pill p-a">A</span></td><td>每周可由她自由支配的时间（扣除作业与家教）</td><td>已据此写硬约束：IP 每周不超过 5 小时，周六上午为主</td><td style="color:var(--teal)">已确认</td></tr>
+          <tr><td><span class="pill p-a">A</span></td><td>面对陌生人的表现</td><td>已取消"纯线上异步形态"备选，直接走线下渠道</td><td style="color:var(--teal)">已确认</td></tr>
+          <tr><td><span class="pill p-a">A</span></td><td>设备与线上账号情况</td><td>已 iPad / Procreate + 社交账号；家长议题转为隐私与监护</td><td style="color:var(--teal)">已确认</td></tr>
+          <tr><td><span class="pill p-b">B</span></td><td>她一次能坚持多久"没人催"的事</td><td>决定最小闭环的颗粒度是 72 小时还是两周</td><td>待回填</td></tr>
+          <tr><td><span class="pill p-b">B</span></td><td>睡眠时长与作息</td><td>决定每天 2 小时家教该砍到多少</td><td>待回填</td></tr>
+          <tr><td><span class="pill p-b">B</span></td><td>兄弟姐妹、家庭语言环境、是否需分担照护</td><td>叙事语境与 Activities 栏位</td><td>待回填</td></tr>
+          <tr><td><span class="pill p-c">C</span></td><td>是否 IEP / 504</td><td>若存在会影响标化安排与学校沟通口径</td><td>待回填</td></tr>
+          <tr><td><span class="pill p-c">C</span></td><td>武术投入时间与级别</td><td>是否可转型为"服务 + 表演"而非比赛</td><td>待回填</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section data-zone="C" id="C">
+  <div class="zone-head"><span class="zn">ZONE C</span><h2>目标与六年路径</h2><p class="zd">四个板块，各自要到的位置 · 六年怎么走 · 每年一个关键词</p></div>
+
+  <div class="panel" id="c1">
+    <h3>四个板块的达标线</h3>
+    <p class="lead">藤校层=<b>入场券</b>线，不是录取保证；Top 15–20 是现实主力区间；红线以下会直接出局。点开每张卡看完整分层与达成路径。</p>
+    <div class="grid4">
+      <div class="card top-b">
+        <div class="pill p-bl">板块 ①</div>
+        <h3>学术</h3>
+        <p class="lead">GPA × 选课难度</p>
+        <div class="small"><b>达标：</b>9–11 年级未加权 GPA <b>3.9+</b>，且顾问勾上 "most demanding program"</div>
+        <div class="meter"><i class="hi" style="width:74%"></i></div>
+        <div class="xs">当前：多数 A / A−，背景足够但难度未满</div>
+        <details class="fold"><summary>三层 Bar 与路径</summary><div class="fb">
+          <table class="tight">
+            <tr><td style="width:74px"><b>藤校层</b></td><td>GPA 3.9–4.0 + AP 8–12 门，覆盖英/数/科/史</td></tr>
+            <tr><td><b>Top 15–20</b></td><td>GPA 3.8+ + AP 6–10 门，核心科目无短板</td></tr>
+            <tr><td style="color:var(--red)"><b>红线</b></td><td>GPA &lt; 3.7，或选课明显保守</td></tr>
+          </table>
+          <p class="small" style="margin-top:8px"><b>路径：</b>8 年级 Algebra 1 保 A（唯一硬指标）→ 9 年级 honors 起步、GPA 立住 → 10–11 年级逐步加满 AP → <b>每年春天与 Gunn 顾问过一次四年计划</b>（免费、最容易被忽略的资源）。宁可在强项加难度，不在弱项赌 B。</p>
+        </div></details>
+      </div>
+      <div class="card top-a">
+        <div class="pill p-b">板块 ②</div>
+        <h3>标化</h3>
+        <p class="lead">SAT / ACT + AP</p>
+        <div class="small"><b>达标：</b>SAT <b>1520–1550+</b> 或 ACT 34–35+；AP 以 5 分为主</div>
+        <div class="meter"><i class="lo" style="width:10%"></i></div>
+        <div class="xs">当前：<b>7 年级零备考</b>，本阶段只做地基</div>
+        <details class="fold"><summary>三层 Bar、政策与路径</summary><div class="fb">
+          <table class="tight">
+            <tr><td style="width:74px"><b>藤校层</b></td><td>SAT 1520–1550+ / ACT 34–35+，AP 基本全 5</td></tr>
+            <tr><td><b>Top 15–20</b></td><td>SAT 1450–1500 / ACT 32–33</td></tr>
+            <tr><td style="color:var(--red)"><b>红线</b></td><td>SAT &lt; 1400</td></tr>
+          </table>
+          <p class="small" style="margin-top:8px"><b>2026-27 政策已翻转：</b>哈佛、耶鲁、布朗、达特茅斯、康奈尔、宾大，加上 MIT、Caltech、斯坦福、Georgetown <b>均已恢复强制 SAT 或 ACT</b>；普林斯顿与哥大 2027–28 起跟进。<b>她 2031 年递交，按"必须提交"规划是唯一稳妥假设。</b></p>
+          <p class="small" style="margin-top:6px"><b>分数通胀：</b>藤校录取者 mid-50% 已到哈佛 1510–1580、耶鲁 1500–1570、康奈尔 1470–1550。<b>1480 现在已在 HYP 的 25 分位以下</b>，所以目标区间上调到 1520–1550+。</p>
+          <p class="small" style="margin-top:6px"><b>路径：</b>7–9 年级零备考——阅读理解才是 SAT 真正的天花板来源→ 10 年级 10 月 PSAT 当诊断 → 10 年级暑假首考 → 11 年级上半年出分即停。<b>两次封顶，最多三次。</b>1550 与 1600 在录取上没有差别。</p>
+          <p class="small" style="margin-top:6px"><b>TOEFL / IELTS：不需要。</b>二年级来美 + 绿卡，英语授课年限远超各校要求，这一项可以直接划掉。</p>
+        </div></details>
+      </div>
+      <div class="card top-p">
+        <div class="pill p-p">板块 ③</div>
+        <h3>长板</h3>
+        <p class="lead">原创 IP 产品化</p>
+        <div class="small"><b>达标：</b>1 项冲 T1（国家级 / 国际认可），1–2 项稳在 T2（区域级 + 影响力）</div>
+        <div class="meter"><i class="pu" style="width:18%"></i></div>
+        <div class="xs">当前：有天赋与兴趣，<b>尚无外部验证</b></div>
+        <details class="fold"><summary>四层分级与判断维度</summary><div class="fb">
+          <table class="tight">
+            <tr><td style="width:52px"><b>T1</b></td><td>国家级 / 国际级认可：全国奖项、作品被大量传播、被调用</td></tr>
+            <tr><td><b>T2</b></td><td>州级 / 区域级 + 明确的领导或影响力</td></tr>
+            <tr><td><b>T3</b></td><td>校级职务、社团骨干</td></tr>
+            <tr><td><b>T4</b></td><td>普通参与 —— 不产生价值</td></tr>
+          </table>
+          <p class="small" style="margin-top:8px"><b>判断维度按权重：</b>深度 &gt; 广度 &gt; 外部验证 &gt; 自主性。一项做三年并持续升级，胜过十项各做一年。</p>
+          <p class="small" style="margin-top:6px"><b>三种必死形态：</b>清单式（10 个社团各一年）· 付费包装项目 · <b>父母发起的项目</b>（在亚裔申请池里最常见，也最容易被识别）。</p>
+        </div></details>
+      </div>
+      <div class="card top-t">
+        <div class="pill p-t">板块 ④</div>
+        <h3>叙事</h3>
+        <p class="lead">推荐信 + 文书 + 活动列表</p>
+        <div class="small"><b>达标：</b>六份材料指向同一个人的同一幅画像，缺一即出现矛盾</div>
+        <div class="meter"><i style="width:8%"></i></div>
+        <div class="xs">当前：零积累 —— 但这一块<b>必须现在就开始</b></div>
+        <details class="fold"><summary>组成、Bar 与四年节奏</summary><div class="fb">
+          <table class="tight">
+            <tr><td style="width:96px"><b>推荐信</b></td><td>升学顾问 1 封 + 学科老师 2 封。差信＝一堆形容词；好信＝<b>读完全文能想起一个画面</b></td></tr>
+            <tr><td><b>主文书</b></td><td>Common App 250–650 词。核心不是成就，是 insight（她怎么想、经历过什么转变）</td></tr>
+            <tr><td><b>补充文书</b></td><td>各校自命题，决定"为什么是我们学校"</td></tr>
+            <tr><td><b>活动列表</b></td><td>10 项 × 150 字符。<b>2026-27 起 leadership 头衔改为选填</b>，对"不做职务、自己做项目"的她是利好</td></tr>
+            <tr><td><b>作品集陈述</b></td><td>艺术路线的第二篇文书</td></tr>
+          </table>
+          <p class="small" style="margin-top:8px"><b>四年节奏：</b>7–8 年级素材积累（每周 5 分钟做事日志）→ 9–10 年级锁定 2–3 位真心老师 → <b>11 年级春当面提出 + 交 brag sheet + 必须 waive FERPA</b> → 12 年级统一口径。<b>推荐信的质量取决于三年的积累，12 年级临时抱佛脚无效。</b></p>
+        </div></details>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel" id="c2">
+    <h3>六年时间线：每年一个关键词</h3>
+    <p class="lead">7 年级此刻 → 12 年级递交。<b>关键词比动作重要</b>——每一年只允许有一件事主导。</p>
+    <div class="card" style="overflow-x:auto">
+      <table style="min-width:900px">
+        <tr>
+          <td class="yr" style="min-width:130px"><span class="pill p-c">7 年级</span><br><b>2026–27</b><br><span class="xs">换掉最低标准的习惯</span></td>
+          <td><b>学术</b>：数学全年 A，漏洞清零；<b>启动每周写作</b><br><b>英语</b>：每天 35 分钟阅读 + 每周精读<br><b>长板</b>：IP 第一次被陌生人看见<br><b>叙事</b>：启动每周 5 分钟做事日志</td>
+          <td class="yr" style="min-width:130px"><span class="pill p-c">8 年级</span><br><b>2027–28</b><br><span class="xs">第一个闭环跑通</span></td>
+          <td><b>学术</b>：Algebra 1 <b>全年 A</b>（唯一硬指标）<br><b>长板</b>：3–5 个角色定型 + 第一次真实交易<br><b>检验点</b>：8 年级末三问（见 Zone F）</td>
+          <td class="yr" style="min-width:130px"><span class="pill p-bl">9 年级</span><br><b>2028–29</b><br><span class="xs">GPA 立住</span></td>
+          <td><b>学术</b>：honors 起步，GPA 立住<br><b>长板</b>：AMC8 信号决定竞赛线是否加码<br><b>组织</b>：带着生意在 Gunn 申请社团 charter</td>
+        </tr>
+        <tr>
+          <td class="yr"><span class="pill p-bl">10 年级</span><br><b>2029–30</b><br><span class="xs">首考 + 外部验证</span></td>
+          <td><b>标化</b>：10 月 PSAT 诊断 → 暑假首考 SAT<br><b>长板</b>：第一个州级 / 赛事晋级<br><b>资产</b>：开始评估版权登记与账目体系</td>
+          <td class="yr"><span class="pill p-p">11 年级</span><br><b>2030–31</b><br><span class="xs">峰值年</span></td>
+          <td><b>学术</b>：AP 峰值 4–5 门<br><b>长板</b>：作品集定稿 + 国家级赛事<br><b>叙事</b>：<b>11 年级春锁定推荐人</b>，整理"失败 / 转折 / 选择"的真实瞬间</td>
+          <td class="yr"><span class="pill p-p">12 年级</span><br><b>2031–32</b><br><span class="xs">收口，不松劲</span></td>
+          <td><b>学术</b>：3–4 门 AP，防"成绩下滑"（12 年级课表照样被审查）<br><b>长板</b>：<b>把社团交给继任者</b><br><b>叙事</b>：六份材料统一口径，围绕 IP 主线</td>
+        </tr>
+      </table>
+    </div>
+    <div class="key" style="margin-top:12px"><b>申请季时间更正：</b>她 12 年级是 2031–32 学年，<b>递交在 2031 年秋，入学 2032 年秋（Class of 2032）</b>。此前口头说的"2031 入学"已修正；政策、文书题目、活动板块规则每年都要逐校重新核实。</div>
+  </div>
+</section>
+
+<section data-zone="D" id="D">
+  <div class="zone-head"><span class="zn">ZONE D</span><h2>学期执行</h2><p class="zd">2026 年 9 月 – 12 月 ｜ 现有日历诊断 · 每周节奏 · 六块达标线</p></div>
+
+  <div class="panel" id="d1">
+    <h3>现有日历的诊断</h3>
+    <p class="lead">输入：9/14–12/8 学习日历，周一休息，周二至周五＝数学推进 + 语文（字帖 / 默写）+ 英语 30 分钟，共 43 个学习日。</p>
+    <div class="grid2" style="margin-bottom:14px">
+      <div class="card top-t">
+        <h3>做得对，请保留</h3>
+        <ul class="none" style="margin-top:8px">
+          <li><b>① 周一休息</b> —— 这是整份日历里最有价值的一条。对低内驱的孩子，<b>确定性的休息锚点比多学一天重要</b>。</li>
+          <li><b>② 颗粒度细到「1.2（2/2）」</b> —— 坐下就知道做什么，不需要意志力去启动。</li>
+          <li><b>③ 打勾机制</b> —— 连续记录本身就是反馈。</li>
+          <li><b>④ 假期诚实留白</b> —— 教师发展日、退伍军人节、感恩节都已标出，计划没有假装这三个月没有中断。</li>
+        </ul>
+      </div>
+      <div class="card top-r">
+        <h3>五个结构问题</h3>
+        <ul class="none" style="margin-top:8px">
+          <li><b>① 比例与短板相反</b> —— 数学（已是区间满分）拿走最大份额，英语（低于校均）只有 30 分钟。</li>
+          <li><b>②「英语 30 分钟」是无效剂量</b> —— 没有内容定义，也没有产出物。</li>
+          <li><b>③ 字帖 / 默写方向不对</b> —— 机械抄写对她边际收益最低。</li>
+          <li><b>④ 43 天里零天留给 IP</b> —— 而长板是唯一不能靠家长投入的板块。</li>
+          <li><b>⑤ 无缓冲日、无复盘环</b> —— 漏一天就要双倍补，这是执行链最容易断的地方。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <svg viewBox="0 0 680 300" width="100%" role="img" aria-label="每周时间预算现状与建议对比图">
+        <text x="0" y="13" font-size="12.5" font-weight="600" fill="#1d1d1b">每周时间预算：现状 vs 建议（分钟 / 周）</text>
+        <g font-size="11" fill="#5c5c57">
+          <rect x="392" y="18" width="11" height="9" rx="2" fill="#cfccc2"/><text x="408" y="27">现状</text>
+          <rect x="446" y="18" width="11" height="9" rx="2" fill="#ef9f27"/><text x="462" y="27">建议</text>
+        </g>
+        <g font-size="11.5" fill="#1d1d1b" text-anchor="end">
+          <text x="88" y="41">英语输入</text><text x="88" y="85">英语写作</text><text x="88" y="129">数学</text>
+          <text x="88" y="173">中文</text><text x="88" y="217">IP 项目</text><text x="88" y="261">家教</text>
+        </g>
+        <rect x="96" y="30" width="105" height="13" rx="3" fill="#cfccc2"/><text x="207" y="41" font-size="10.5" fill="#8a8a83">120</text>
+        <rect x="96" y="45" width="183" height="13" rx="3" fill="#ef9f27"/><text x="285" y="56" font-size="10.5" fill="#8a5006">210</text>
+        <text x="100" y="78" font-size="10.5" fill="#cfccc2">— 0</text>
+        <rect x="96" y="89" width="22" height="13" rx="3" fill="#ef9f27"/><text x="124" y="100" font-size="10.5" fill="#8a5006">25</text>
+        <rect x="96" y="118" width="140" height="13" rx="3" fill="#cfccc2"/><text x="242" y="129" font-size="10.5" fill="#8a8a83">160</text>
+        <rect x="96" y="133" width="105" height="13" rx="3" fill="#185fa5"/><text x="207" y="144" font-size="10.5" fill="#185fa5">120</text>
+        <rect x="96" y="162" width="61" height="13" rx="3" fill="#cfccc2"/><text x="163" y="173" font-size="10.5" fill="#8a8a83">70</text>
+        <rect x="96" y="177" width="26" height="13" rx="3" fill="#8a8a83"/><text x="128" y="188" font-size="10.5" fill="#5c5c57">30</text>
+        <text x="100" y="210" font-size="10.5" fill="#cfccc2">— 0</text>
+        <rect x="96" y="221" width="79" height="13" rx="3" fill="#3c3489"/><text x="181" y="232" font-size="10.5" fill="#3c3489">90</text>
+        <rect x="96" y="250" width="524" height="13" rx="3" fill="#cfccc2"/><text x="450" y="261" font-size="10.5" fill="#ffffff" text-anchor="end">600</text>
+        <rect x="96" y="265" width="262" height="13" rx="3" fill="#0f6e56"/><text x="364" y="276" font-size="10.5" fill="#0f6e56">300</text>
+        <text x="0" y="293" font-size="10.5" fill="#8a8a83">总量几乎没变，变的是位置：把时间从「已经很强的那一侧」搬到「落后且只能靠时间追的那一侧」。</text>
+      </svg>
+    </div>
+
+    <details class="fold">
+      <summary>展开：家教时间为什么必须重排（本轮最重要的一条）</summary>
+      <div class="fb">
+        <p class="small">每天 2 小时、一周约 10 小时，是目前最大的一笔时间支出。但她的区级数学评测为 2780 —— <b>六年级能测得的最高值</b>。这说明瓶颈从来不是听不懂。</p>
+        <table class="tight" style="margin-top:8px">
+          <tr><th style="width:90px"></th><th style="width:44%">现状</th><th>建议</th></tr>
+          <tr><td style="color:var(--red)"><b>不该做</b></td><td>讲一遍 + 陪做题 + 推进校内进度</td><td>把时间投在收益最小处，还会强化"学习＝有人陪着做的任务"</td></tr>
+          <tr><td style="color:var(--teal)"><b>该做</b></td><td>每周 2 次：<b>英语精读与写作反馈</b>（她最需要有人对话的一块）</td><td>每周 1 次：<b>数学讲题与难题</b>（练表达、练英文术语，而不是练熟练度）</td></tr>
+        </table>
+        <p class="small" style="margin-top:8px">若涉及合约或人情，可以分两步：<b>先改内容，寒假再改时长</b>。目标 ≤5 小时/周，省下的时间还给 IP 与空白。她每周真正能自由支配的只有约 3 小时，塞满就没有一块属于她。</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="panel" id="d2">
+    <h3>建议的每周节奏</h3>
+    <p class="lead">保留"周一休息"这个锚点，只调整内容与顺序。周二至周五每天学业总量约 90 分钟，比现在略降。</p>
+    <div class="wk">
+      <div class="day rest">
+        <h4>周一 <em>0 学业</em></h4>
+        <span class="blk b-fr"><b>完全休息</b><em>这条不许被占用</em></span>
+        <span class="blk b-en"><b>30 分钟自选阅读</b><em>不算作业，躺着看也算</em></span>
+      </div>
+      <div class="day">
+        <h4>周二 <em>90 分钟</em></h4>
+        <span class="blk b-en"><b>英语 35′</b><em>自选小说，连续阅读</em></span>
+        <span class="blk b-ma"><b>数学 30′</b><em>推进 + 最后 5′ 讲题</em></span>
+        <span class="blk b-ip"><b>IP 15′</b><em>sketchbook，随意画</em></span>
+      </div>
+      <div class="day">
+        <h4>周三 <em>90 分钟</em></h4>
+        <span class="blk b-en"><b>英语 35′</b><em>非虚构精读 + 批注</em></span>
+        <span class="blk b-ma"><b>数学 30′</b><em>错题重做优先</em></span>
+        <span class="blk b-ip"><b>IP 15′</b></span>
+        <span class="blk b-cn"><b>中文 10′</b><em>读中文书</em></span>
+      </div>
+      <div class="day">
+        <h4>周四 <em>90 分钟</em></h4>
+        <span class="blk b-en"><b>英语 35′</b><em>自选小说</em></span>
+        <span class="blk b-ma"><b>数学 30′</b><em>本周难题（AoPS）</em></span>
+        <span class="blk b-ip"><b>IP 15′</b></span>
+      </div>
+      <div class="day">
+        <h4>周五 <em>105 分钟</em></h4>
+        <span class="blk b-en"><b>英语 50′</b><em>本周一次成篇写作</em></span>
+        <span class="blk b-ma"><b>数学 30′</b></span>
+        <span class="blk b-ip"><b>IP 15′</b></span>
+        <span class="blk b-cn"><b>中文 10′</b><em>写 3 句感想</em></span>
+      </div>
+      <div class="day">
+        <h4>周六 <em>上午为主</em></h4>
+        <span class="blk b-ip"><b>IP 主块 60–90′</b><em>一周唯一的大块创作时间</em></span>
+        <span class="blk b-fr"><b>下午：美术 + 武术</b><em>已固定，不动</em></span>
+        <span class="blk b-cn"><b>补做日 30′</b><em>做不完就勾"放弃"，不顺延</em></span>
+      </div>
+      <div class="day rest">
+        <h4>周日 <em>不排学业</em></h4>
+        <span class="blk b-fr"><b>全天不排</b><em>已确认，遵守</em></span>
+        <span class="blk b-en"><b>可选：30 分钟阅读</b></span>
+        <span class="blk b-cn"><b>家庭周复盘 10′</b><em>只问"下周改什么"</em></span>
+      </div>
+    </div>
+    <div class="note" style="margin-top:12px"><b>周复盘的三个固定问题：</b>① 本周哪天没勾上？② 为什么（是太难、太累，还是忘了）？③ <b>下周改哪一条流程</b>——只改流程，不改决心。第三个问题问不出来，就说明这周的难度或顺序有问题。</div>
+  </div>
+
+  <div class="panel" id="d3">
+    <h3>六块达标线（本学期，2026 年 9–12 月）</h3>
+    <p class="lead">全部写成 12 月可验收的形式。点开每张卡看教材体系与检验点。</p>
+    <div class="grid3">
+      <div class="card top-a">
+        <div class="pill p-a">一号工程</div>
+        <h3>英语 · 输入</h3>
+        <p class="small" style="margin:6px 0 8px"><b>达标：</b>读完 <b>8–10 本书</b>，Lexile 向 <b>1200L</b> 移动</p>
+        <p class="xs">每天 30 分钟连续阅读 ＋ 每周一次 35 分钟精读</p>
+        <details class="fold"><summary>教材体系与检验点</summary><div class="fb">
+          <p class="small"><b>体系：</b>自选小说（入口）→ 青少年虚构 → 非虚构。<b>Newsela</b>（可调 Lexile 的分级非虚构）、<b>CommonLit</b>（批注训练），配一份纸质阅读记录。</p>
+          <p class="small" style="margin-top:6px"><b>12 月检验：</b>累计本数 / 页数；Newsela 的 Lexile 档位是否被系统自动上调。<b>这是唯一不能后补的一项。</b></p>
+        </div></details>
+      </div>
+      <div class="card top-a">
+        <div class="pill p-b">高杠杆</div>
+        <h3>英语 · 写作</h3>
+        <p class="small" style="margin:6px 0 8px"><b>达标：</b>组织与论据从 <b>3/4 → 4/4</b>，交出 8 篇代表作</p>
+        <p class="xs">每周五 25–30 分钟成篇 ＋ 隔周一次结构化反馈</p>
+        <details class="fold"><summary>教材体系与检验点</summary><div class="fb">
+          <p class="small"><b>体系：不教应试模板。</b>每周只叠一个技能点：段落结构 → show don't tell → 对话写法 → 用证据支撑。<b>最优入口：给她自己的 IP 角色写故事与世界设定</b>——同一份时间喂写作、IP、未来文书三条线。前期只鼓励不纠错。</p>
+          <p class="small" style="margin-top:6px"><b>12 月检验：</b>8 篇自选代表作；写作时不再需要先中文构思。</p>
+        </div></details>
+      </div>
+      <div class="card top-b">
+        <div class="pill p-c">维持 + 换打法</div>
+        <h3>数学</h3>
+        <p class="small" style="margin:6px 0 8px"><b>达标：</b>校内全年 A ＋ 英文术语库 60 词</p>
+        <p class="xs">每周 4 × 30 分钟；每次最后 5 分钟改成「讲题」</p>
+        <details class="fold"><summary>教材体系与检验点</summary><div class="fb">
+          <p class="small"><b>体系：</b>校内 <b>Illustrative Mathematics / Big Ideas</b>（PAUSD 教材）+ <b>Khan Academy</b>（<b>英文界面</b>，顺带练数学术语）；深度补充用 <b>AoPS Prealgebra</b>，每周 2–3 题，重过程不重数量。</p>
+          <p class="small" style="margin-top:6px"><b>12 月检验：</b>单元测验 ≥ 90%；能用英文讲清一道题；术语本写满 60 词。</p>
+        </div></details>
+      </div>
+      <div class="card top-p">
+        <div class="pill p-p">本年新增</div>
+        <h3>IP 项目</h3>
+        <p class="small" style="margin:6px 0 8px"><b>达标：</b>3–5 个原创角色定型 ＋ <b>一次非亲友陌生人的真实反馈</b></p>
+        <p class="xs">周六上午 60–90 分钟主块 ＋ 每天 15 分钟 sketchbook</p>
+        <details class="fold"><summary>工具、渠道与检验点</summary><div class="fb">
+          <p class="small"><b>工具：</b>Procreate / Clip Studio（iPad 与笔已具备）。<b>先建立"发布 → 反馈 → 迭代"的循环，今年不谈商业化。</b></p>
+          <p class="small" style="margin-top:6px"><b>合规：</b>13 岁前不能开 Etsy / Shopify / 支付账户；<b>现有的社交账号建议：家长共管、不露真人正脸与校名、这一年只发作品不发个人。</b></p>
+          <p class="small" style="margin-top:6px"><b>12 月检验：</b>8 周内发布 8 次；拿到至少一个陌生人的具体评价；<b>她是否在没人要求时自己打开软件</b>。</p>
+        </div></details>
+      </div>
+      <div class="card">
+        <div class="pill p-c">降配保留</div>
+        <h3>中文</h3>
+        <p class="small" style="margin:6px 0 8px"><b>达标：</b>读写不断层即可，不再追字帖页数</p>
+        <p class="xs">每周 2 × 10–15 分钟</p>
+        <details class="fold"><summary>为什么降配，换成什么</summary><div class="fb">
+          <p class="small">机械抄写既不练字（她在美国不用手写中文），也不练表达。中文对她的真实价值在未来——<b>双语身份叙事</b>，以及 Common App 里"背景 / 身份"这类题目。<b>换成：</b>中文读物 + 每周写 3 句感想。</p>
+          <p class="small" style="margin-top:6px"><b>12 月检验：</b>感想累计成一篇小短文；能口头讲清书的内容。</p>
+        </div></details>
+      </div>
+      <div class="card">
+        <div class="pill p-c">校内其他</div>
+        <h3>科学 / 历史 / 选修</h3>
+        <p class="small" style="margin:6px 0 8px"><b>达标：</b>不追成绩，只练一件事——<b>每次作业比要求多出一个东西</b></p>
+        <p class="xs">不额外排时间，只在现有作业里改</p>
+        <details class="fold"><summary>为什么这比分数重要</summary><div class="fb">
+          <p class="small"><b>7 年级成绩不进高中成绩单。</b>所以本学期真正的目标是换掉"最低标准完成"的习惯，而不是抬高一次分数。多出的那一个东西可以是一个例子、一句追问、一张图表、一段延伸阅读。</p>
+          <p class="small" style="margin-top:6px"><b>12 月检验：</b>老师评语里是否第一次出现"超出预期 / 主动"这类词。</p>
+        </div></details>
+      </div>
+    </div>
+    <div class="key" style="margin-top:12px">六块里只有<b>英语输入</b>不可延期：写作可以明年练、数学可以追难度、IP 可以换形态，词汇量与阅读广度只能靠每周稳定几小时慢慢堆。<b>所以它排在最前面。</b></div>
+  </div>
+</section>
+
+<section data-zone="E" id="E">
+  <div class="zone-head"><span class="zn">ZONE E</span><h2>长板引擎</h2><p class="zd">原创 IP 产品化 ｜ 三层证据 · 六年阶梯 · 权威认可 · 确权合规 · 领导力</p></div>
+
+  <div class="panel" id="e1">
+    <h3>三层证据：什么才算「IP 成立」</h3>
+    <p class="lead">纯美术的分歧在于「评委喜不喜欢」；IP 的分歧在于「有没有人可以查证」。三层自下而上，越往上越少人到达。</p>
+    <div class="card">
+      <svg viewBox="0 0 680 272" width="100%" role="img" aria-label="IP证据三层结构图">
+        <g transform="translate(26,152) rotate(-90)"><text x="0" y="0" font-size="11" fill="#8a8a83" text-anchor="middle">↑ 证据强度与稀缺度</text></g>
+
+        <rect x="72" y="6" width="596" height="78" rx="9" fill="#fbefd9" stroke="#ef9f27"/>
+        <text x="88" y="28" font-size="13" font-weight="600" fill="#1d1d1b">第三层 · 资产层　可被拥有与确权</text>
+        <text x="88" y="48" font-size="11.5" fill="#5c5c57">指标：版权登记 · 商标 · 授权给他人使用 · 被人付费转载</text>
+        <text x="88" y="68" font-size="11" fill="#8a5006">10 年级起。顺序不能反——先有卖出去的产品，再谈保护名字</text>
+
+        <rect x="72" y="92" width="596" height="78" rx="9" fill="#e3f5ef" stroke="#5dcaa5"/>
+        <text x="88" y="114" font-size="13" font-weight="600" fill="#1d1d1b">第二层 · 商业层　有人愿意付钱</text>
+        <text x="88" y="134" font-size="11.5" fill="#5c5c57">指标：GMV · 毛利 · 客户数 · 复购率 · 非亲友客户占比</text>
+        <text x="88" y="154" font-size="11" fill="#0f6e56">8–9 年级。第一单可以是亲友，第二单第三单必须是陌生人</text>
+
+        <rect x="72" y="178" width="596" height="78" rx="9" fill="#eeedfe" stroke="#b3adf0"/>
+        <text x="88" y="200" font-size="13" font-weight="600" fill="#1d1d1b">第一层 · 内容层　被陌生人看见</text>
+        <text x="88" y="220" font-size="11.5" fill="#5c5c57">指标：发布连续性（周）· 受众规模 · 具体评价而非点赞</text>
+        <text x="88" y="240" font-size="11" fill="#3c3489">7–8 年级。本学年的全部目标就到这里，不谈商业化</text>
+
+        <text x="72" y="268" font-size="10.5" fill="#8a8a83">只有内容层＝自娱自乐；内容层＋商业层＝生意做得不错；三层齐了才叫 IP。</text>
+      </svg>
+    </div>
+    <div class="key" style="margin-top:12px">她自己说过不做绘画教学、不接定制。<b>这条路正好不需要她出售手艺</b>——IP 的价值来自「可以被拥有、被确权、被复利」，而不是「画得多快」。</div>
+  </div>
+
+  <div class="panel" id="e2">
+    <h3>六年阶梯：每一年只长一层</h3>
+    <p class="lead">顺序不能跳。跳过内容层直接开店，买家只会是你们。</p>
+    <div class="card">
+      <div class="step"><div class="gd">7 年级</div><div class="ct">
+        <b>让兴趣变成作品</b>
+        <p>3–5 个原创角色定型 · 选定一个发布阵地并连续更新 8 周 · 拿到第一个<b>陌生人的具体评价</b></p>
+      </div></div>
+      <div class="step"><div class="gd">8 年级</div><div class="ct">
+        <b>第一次真实交易</b>
+        <p>跑完一次完整闭环：生产 → 定价 → 交付 → 记账 → 复盘。验证陌生人是否真的愿意付钱</p>
+        <details class="fold"><summary>建议的产品形态（让她自己选）</summary><div class="fb">
+          <ul class="tight"><li><b>贴纸 / 明信片 / 小型印刷品</b>——启动成本 $50–150，第一时间教她单位成本与毛利</li><li><b>角色周边组合</b>——徽章、立牌、明信片套装，练品类组合</li><li><b>给本地小店 / 非营利做视觉设计</b>——最难也最值钱（要谈合同与修改条款），建议 9 年级以后</li><li><b>不建议</b>：定制画像（时间换钱，天花板当天封顶）、绘画教学（把她钉成「会画画的姐姐」）</li></ul>
+        </div></details>
+      </div></div>
+      <div class="step"><div class="gd">9 年级</div><div class="ct">
+        <b>让它变成一个组织</b>
+        <p>进入 Gunn，<b>带着自己的生意申请社团 charter</b>；第一次分工——把打包、物料、客服交给别人；同步进 JA Company Program</p>
+      </div></div>
+      <div class="step"><div class="gd">10 年级</div><div class="ct">
+        <b>第一次外部验证</b>
+        <p>州级 / 国家级赛事投稿；启动资产层——评估首次版权登记；仍是<b>同一门生意反复投不同赛事</b></p>
+      </div></div>
+      <div class="step"><div class="gd">11 年级</div><div class="ct">
+        <b>峰值年：制度化</b>
+        <p>作品集定稿 + 培训手册 + 分润规则——<b>有人能替代她</b>；同时把能力开放给社区（工作坊 / 展览）＝服务与影响力</p>
+      </div></div>
+      <div class="step"><div class="gd">12 年级</div><div class="ct">
+        <b>交接，而不是结束</b>
+        <p>把社团交给继任者。招生官真正在意的是这个问题：<b>「她上大学以后，这门生意还能活吗？」</b>——能答出这一层，就是 T1 级别</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="panel" id="e3">
+    <h3>权威认可：分量排序与可选锚点</h3>
+    <p class="lead">先给判断标准，再给清单。<b>晋级比名次重要</b>——进半决赛本身已经可以用来叙事。</p>
+    <div class="grid2" style="margin-bottom:14px">
+      <div class="card">
+        <div class="funnel">
+          <div class="fn-row" style="width:40%;background:var(--amber-line)"><div>联邦确权<span>最少人做到</span></div></div>
+          <div class="fn-row" style="width:58%;background:#5dcaa5"><div>第三方机构选拔晋级<span>由投资人 / 企业主判定</span></div></div>
+          <div class="fn-row" style="width:78%;background:#85b7eb"><div>全国 / 国际赛事名次<span>可见，但人人都投</span></div></div>
+          <div class="fn-row" style="width:96%;background:#cfccc2;color:#5c5c57"><div>校内职务<span>必补，不能当主线</span></div></div>
+        </div>
+        <p class="small" style="margin-top:10px"><b>诚实提醒：</b>pitch 赛证明的是<b>表达与方案质量</b>，不证明生意成立，招生官很清楚这一点。正确用法是——<b>同一份真实生意逐年投不同赛事</b>，让一门生意长出一条连续的作品线。</p>
+      </div>
+      <div class="card top-a">
+        <h3>今年唯一要落实的一件事</h3>
+        <ul class="none" style="margin-top:8px">
+          <li><b>确认湾区是否有 NFTE 与 YEA! 章节</b>，以及 TYE Silicon Valley 2027 的招生要求。</li>
+          <li>这三条渠道决定她 9–10 年级<b>够不够得到最高层级</b>。它们的入口都不是公开报名，必须提前接上线。</li>
+          <li>其他赛事到时候<b>按同一份材料投递即可</b>，赛事不缺，缺的是入口。</li>
+        </ul>
+        <div class="note" style="margin-top:10px">每年只留 <b>1–2 个锚点</b>。投得太多会吞掉她的 GPA 和内驱力。</div>
+      </div>
+    </div>
+    <details class="fold">
+      <summary>展开完整平台地图（12 个渠道：年龄 · 成本 · 权威来源 · 何时启动）</summary>
+      <div class="fb">
+        <table class="tight">
+          <tr><th style="width:170px">项目</th><th style="width:132px">年龄 / 成本</th><th style="width:38%">权威来自哪里</th><th>何时启动</th></tr>
+          <tr><td><b>JA It's My Business!</b></td><td>6–8 年级 · 6 次课</td><td>结课是一次产品 pitch 赛</td><td><b>现在即可</b></td></tr>
+          <tr><td><b>YEA! + Saunders Scholars 全美冠军赛</b></td><td>11–18 岁 · 约 $20</td><td>当地商会主办，导师是<b>真实企业主</b>；须真实注册公司并向投资人委员会募资；全国赛发大学奖学金与启动资金</td><td>8–9 年级（前提是有章节）</td></tr>
+          <tr><td><b>Acton Children's Business Fair</b></td><td>摊位费约 $25–50，每摊最多 3 人</td><td>覆盖 845 城、累计 11.4 万+ 名孩子。<b>规矩写着：孩子必须自己卖，家长推销会被撤摊</b>——对「所有权归她」是最好的天然保障</td><td>先去官网查湾区场次</td></tr>
+          <tr><td><b>JA Company Program</b></td><td>9–12 年级 · <b>免费</b></td><td>出售股份募资、<b>选举领导岗与部门分工</b>、期末清算；判定人是企业志愿者。<b>业绩是清算出来的，不是自述的</b></td><td><b>9 年级首选</b></td></tr>
+          <tr><td><b>TYE（TiE Young Entrepreneurs）</b></td><td>9–12 年级 · 约 $425–799</td><td><b>硅谷章节就在 Palo Alto</b>；10–12 周（周日制）→ 州赛 → 全球赛；团队制天然产生领导岗</td><td>9 年级起，离家最近</td></tr>
+          <tr><td><b>Gunn DECA / FBLA</b></td><td>9 年级起 · 免费</td><td>加州 DECA Business Pitch，Gunn 曾有队伍进州前十</td><td>9 年级落位</td></tr>
+          <tr><td><b>Conrad Challenge</b></td><td>13–18 岁 · <b>免费</b></td><td>2–5 人队 + 成人教练，决赛在休斯顿 Space Center；上届 4,000+ 学生、70+ 国</td><td>满 13 岁起</td></tr>
+          <tr><td><b>Diamond Challenge</b></td><td>14–18 岁</td><td>特拉华大学主办，商业与社会创新双赛道，$100K 奖金池</td><td>9 年级起</td></tr>
+          <tr><td><b>NFTE Youth Entrepreneurship Showcase</b></td><td>15–22 岁 · 经课程渠道</td><td>15 年发出 $2M+ 种子资金，半决赛全美，全球总决赛 20+ 国。<b>不接受社会个人报名</b>，须先通过 NFTE 课程或会员校晋级</td><td>10 年级起</td></tr>
+          <tr><td><b>Wharton Global 投资赛</b></td><td>9–12 年级 · 免费</td><td>4–6 人队，须本校教师顾问；<b>队长须满 16 岁</b></td><td>9 年级当队员，11 年级可当队长</td></tr>
+          <tr><td><b>Blue Ocean 创业赛</b></td><td>—</td><td>2026 年 23,000+ 学生、173 国。<b>规模最大，单个名次分量有限</b></td><td>第二梯队</td></tr>
+          <tr><td><b>SAGE Global</b></td><td>要求项目<b>真正在运营</b></td><td>只有当上述事实成立时才值得投</td><td>11 年级</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="panel" id="e4">
+    <h3>确权与合规：几条必须提前知道的规则</h3>
+    <p class="lead">这些是硬规则，不是建议。查证于 2026 年 10 月。</p>
+    <div class="grid2">
+      <div class="card top-t">
+        <div class="pill p-t">可以做</div>
+        <h3>版权登记：未成年人可以自己署名</h3>
+        <ul class="tight" style="margin-top:8px">
+          <li><b>美国版权局官方明确无年龄下限</b>——未成年人可以自己拥有版权，并以自己名义登记；父母可作代理人代为申请。</li>
+          <li>单件电子申请 <b>$45</b>（单一作者、非委托创作）/ 标准申请 <b>$65</b> / 未发表作品<b>成组登记</b>最多 10 件 <b>$85</b>。未发表也能登记。</li>
+          <li>7–8 年级控制在<b>一年 1–2 次、$100–200 以内</b>。确权是里程碑，不是 KPI。</li>
+        </ul>
+      </div>
+      <div class="card top-r">
+        <div class="pill p-a">先讨论再执行</div>
+        <h3>登记记录的公开信息风险</h3>
+        <ul class="tight" style="margin-top:8px">
+          <li>登记记录<b>公开可查</b>：登记人的姓名、地址、出生年份一旦公开，<b>基本无法删除</b>。</li>
+          <li>建议用<b>邮政信箱或工作室地址</b>，不用家庭住址；全家人先谈清楚再决定要不要登记。</li>
+          <li><b>商标：</b>USPTO 无年龄限制，每类约 $250–350（以官网为准）。原则是<b>卖出产品之后再保护名字</b>。</li>
+        </ul>
+      </div>
+      <div class="card top-a">
+        <div class="pill p-b">平台年龄门槛</div>
+        <h3>13 岁前不能开店，这是合法省事的安排</h3>
+        <ul class="tight" style="margin-top:8px">
+          <li><b>Etsy：</b>13 岁以下完全不允许；13–17 岁可用，但 shop owner 必须是家长，金融信息必须是家长的。</li>
+          <li><b>Shopify / eBay / Amazon / PayPal：</b>一律 18+。<b>Instagram / TikTok：</b>13+（COPPA 的原因）。</li>
+          <li><b>加州 CDTFA 明确规定：不得向未成年签发 seller's permit</b>，加父母作为共同申请人也不行 → 执照、税号、收款必须以家长名义。</li>
+        </ul>
+      </div>
+      <div class="card top-r">
+        <div class="pill p-a">红线</div>
+        <h3>三条会让整个项目失去意义的做法</h3>
+        <ul class="tight" style="margin-top:8px">
+          <li><b>家长代做</b>（打包、发货、客服、拉客户）——校友面试、推荐老师、甚至作品的过程稿都能看出来，<b>比没有更糟</b>。</li>
+          <li><b>家长输血</b>（补亏损、买库存、拉朋友下单）——生意失去真实性，也失去全部教育意义。</li>
+          <li><b>AI 底线：</b>纯 AI 生成<b>不能登记版权</b>（缺人类作者），在大学眼里也是减分。定位只能是「会画画的人用 AI 提效」，<b>过程稿必须留痕</b>。</li>
+        </ul>
+      </div>
+    </div>
+    <details class="fold">
+      <summary>展开：税务口径（第一笔收入产生后才会用到）</summary>
+      <div class="fb">
+        <ul class="tight">
+          <li>年<b>净</b>自雇收入 ≥ <b>$400</b> 就要报 Schedule C + Schedule SE（15.3% 自雇税，<b>不分年龄</b>）。</li>
+          <li><b>kiddie tax 不适用于劳动所得</b>——她自己赚的钱不会按父母的税率计算。</li>
+          <li>加州自雇的未成年人不需要 work permit；她可以以自己的名义持有版权与 IP。</li>
+          <li><b>第一年先走线下 + 熟人 + 家长收款码</b>（农夫市集、校园义卖、邻里委托），13 岁后再上平台。这不是限制——线下面对面让她直接看到客户的反应，这正是她最需要的反馈强度。</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+
+  <div class="panel" id="e5">
+    <h3>领导力：头衔不值钱，可被验证才值钱</h3>
+    <p class="lead">2026–27 起 Common App 已把 leadership 头衔改为<b>选填</b>。官方在淡化头衔——要证明的不是职务，是<b>带动了谁、改变了什么可衡量的东西</b>。</p>
+    <div class="grid3">
+      <div class="card top-p">
+        <div class="pill p-p">含金量最高</div>
+        <h3>① 生意内部</h3>
+        <p class="small" style="margin:6px 0 0">雇同学、写操作流程、定分润规则、处理第一个掉链子的人。<b>可审计</b>：付出去的报酬、分工表、流程文档都是实证。</p>
+      </div>
+      <div class="card top-t">
+        <div class="pill p-t">由第三方判定</div>
+        <h3>② 校外组织</h3>
+        <p class="small" style="margin:6px 0 0">JA Company Program 的选任岗、TYE 队长、DECA officer。<b>岗位是选出来的，业绩是清算出来的</b>——判定她的人不是你们。</p>
+      </div>
+      <div class="card top-b">
+        <div class="pill p-bl">必补，别当主线</div>
+        <h3>③ 校内社团</h3>
+        <p class="small" style="margin:6px 0 0">课外再强也替代不了这一栏。但<b>「副主席」这种职务几乎无法证明她改变了什么</b>。</p>
+      </div>
+    </div>
+    <details class="fold">
+      <summary>展开：Gunn 社团地图 + 创始人方案 + 自证三件套</summary>
+      <div class="fb">
+        <p class="small" style="margin-bottom:8px"><b>Gunn 的可用社团：</b>Business Club、Economics Club、<b>Graphic Design Club</b>、National Art Honor Society、Zine Club、Pandora's Box、Helios Magazine；另有 Model UN、Speech and Debate、Key Club、YCS-Interact。<b>全校 100+ 社团，须有教师顾问并向 Student Activities 注册</b>——这意味着发起新社团是被允许的，且有明确流程。</p>
+        <p class="small" style="margin-bottom:8px"><b>创始人方案（推荐）：</b>9 年级带着自己的 IP 生意申请成立社团 → 10 年级做出实际产出（一次学生创作者市集）→ 11 年级制度化 → 12 年级<b>交给继任者</b>。一个从 0 到有成员、有产出、有继任者的社团，本身就是一篇现成的文书。</p>
+        <p class="small"><b>自证三件套，缺一即降级：</b>① 职务可被核实（官方名录 / 顾问推荐信）② 任期内的三个数字（成员数、活动数、产出）③ 交接证据。</p>
+        <div class="warn" style="margin-top:10px"><b>红线：不要同时当 5 个社长。</b>头衔通胀是这个申请池里最典型的失效模式，招生官一眼就能识别。</div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section data-zone="F" id="F">
+  <div class="zone-head"><span class="zn">ZONE F</span><h2>规则与清单</h2><p class="zd">三个诚实复盘点 · 家长守则 · 资源取舍 · 本学期执行清单</p></div>
+
+  <div class="panel" id="f1">
+    <h3>三个检验点：到点必须诚实复盘</h3>
+    <p class="lead">她是低内驱型选手，所以每个阶段都必须<b>预设合法的退出窗口</b>。放弃不等于失败——硬推到最后的代价是长板没做成、亲子关系也赔进去。</p>
+    <div class="card">
+      <svg viewBox="0 0 680 236" width="100%" role="img" aria-label="三个检验点与分流路径图">
+        <text x="0" y="14" font-size="12.5" font-weight="600" fill="#1d1d1b">三次检查，每次只有两条分岔</text>
+
+        <rect x="0" y="26" width="204" height="60" rx="9" fill="#eeedfe" stroke="#b3adf0"/>
+        <text x="14" y="50" font-size="12.5" font-weight="600" fill="#1d1d1b">8 年级末三问</text>
+        <text x="14" y="70" font-size="11" fill="#5c5c57">① 没人催时她会自己找客户吗？</text>
+        <text x="14" y="82" font-size="11" fill="#5c5c57">② 有陌生人真实付款吗？</text>
+
+        <path d="M204 56 L268 56" stroke="#85b7eb" stroke-width="1.6" marker-end=""/>
+        <path d="M204 66 L268 78" stroke="#85b7eb" stroke-width="1.6"/>
+
+        <rect x="268" y="26" width="200" height="60" rx="9" fill="#e3f5ef" stroke="#5dcaa5"/>
+        <text x="282" y="50" font-size="12.5" font-weight="600" fill="#1d1d1b">三个 yes：商业升为主线</text>
+        <text x="282" y="70" font-size="11" fill="#5c5c57">③ 有没有反过来让她想学数学 /</text>
+        <text x="282" y="82" font-size="11" fill="#5c5c57">想写东西？　→ 9 年级加大投入</text>
+
+        <rect x="268" y="96" width="200" height="60" rx="9" fill="#fcebeb" stroke="#e8a0a0"/>
+        <text x="282" y="120" font-size="12.5" font-weight="600" fill="#1d1d1b">两个以下：降级为文书素材</text>
+        <text x="282" y="140" font-size="11" fill="#5c5c57">那时她才 9 年级，重找主线完全</text>
+        <text x="282" y="152" font-size="11" fill="#5c5c57">来得及 —— 这是合法退出，不是失败</text>
+
+        <rect x="0" y="176" width="204" height="52" rx="9" fill="#e8f1fb" stroke="#85b7eb"/>
+        <text x="14" y="198" font-size="12.5" font-weight="600" fill="#1d1d1b">10 年级末：有没有外部验证</text>
+        <text x="14" y="217" font-size="11" fill="#5c5c57">有人看、有人用、有人评？没有 →</text>
+        <text x="14" y="228" font-size="11" fill="#5c5c57">换项目形态，而不是加量</text>
+
+        <rect x="268" y="176" width="204" height="52" rx="9" fill="#fbefd9" stroke="#ef9f27"/>
+        <text x="282" y="198" font-size="12.5" font-weight="600" fill="#1d1d1b">11 年级春：锁定推荐人</text>
+        <text x="282" y="217" font-size="11" fill="#5c5c57">老师能不能写出一个具体场景？</text>
+        <text x="282" y="228" font-size="11" fill="#5c5c57">不能 → 换人，不要谈关系的分量</text>
+
+        <path d="M204 202 L268 202" stroke="#85b7eb" stroke-width="1.6"/>
+
+        <rect x="500" y="26" width="180" height="202" rx="9" fill="#f1efe8"/>
+        <text x="514" y="50" font-size="12.5" font-weight="600" fill="#1d1d1b">贯穿全程的一句话</text>
+        <text x="514" y="72" font-size="11" fill="#5c5c57">永远不要用「这对</text>
+        <text x="514" y="86" font-size="11" fill="#5c5c57">申请有用」去推动她。</text>
+        <text x="514" y="106" font-size="11" fill="#a32d2d">一旦被她识破，</text>
+        <text x="514" y="120" font-size="11" fill="#a32d2d">连她唯一可能自发</text>
+        <text x="514" y="134" font-size="11" fill="#a32d2d">投入的那条线</text>
+        <text x="514" y="148" font-size="11" fill="#a32d2d">也会熄灭。</text>
+        <text x="514" y="172" font-size="11" fill="#5c5c57">跟她只需要说一句：</text>
+        <text x="514" y="190" font-size="11.5" font-weight="600" fill="#0f6e56">「你想做点自己的</text>
+        <text x="514" y="205" font-size="11.5" font-weight="600" fill="#0f6e56">东西吗？你自己</text>
+        <text x="514" y="220" font-size="11.5" font-weight="600" fill="#0f6e56">说了算。」</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="panel" id="f2">
+    <h3>家长守则与钱的优先级</h3>
+    <div class="grid2">
+      <div class="card top-t">
+        <h3>六条守则</h3>
+        <ul class="none" style="margin-top:8px">
+          <li><b>① 所有权归她。</b>你们提供资源和选项，<b>不设定产出</b>——「这个月要交三张」这种话不要说。</li>
+          <li><b>② 允许放弃。</b>每个检验点都是合法的退出窗口。</li>
+          <li><b>③ 不用「对申请有用」当理由。</b>这是唯一一条不能破的规矩。</li>
+          <li><b>④ 不把参赛做成任务。</b>比赛是「看看自己走到哪一步」，不是 KPI。</li>
+          <li><b>⑤ 亏损不补。</b>种子资金一次性、封顶（比如 $200），先讲清规则，之后不再追加。</li>
+          <li><b>⑥ 学业优先不可交易。</b>影响 GPA 就降级——学业是入场券，生意是加分项。</li>
+        </ul>
+        <div class="note" style="margin-top:10px"><b>对话口径：</b>不问「今天赚了多少」，问<b>「下一个版本你打算改什么」</b>。</div>
+      </div>
+      <div class="card top-r">
+        <h3>钱：值得 vs 不值得</h3>
+        <p class="small" style="margin:6px 0 8px">预算不设限是好条件，但<b>钱买不到长板</b>——真正的瓶颈是时间和执行意愿。</p>
+        <table class="tight">
+          <tr><td style="width:66px"><span class="pill p-t">值得</span></td><td>好的数字艺术老师（1 对 1）· 正版软件与硬件 · 高质量夏校（10–11 年级）· 11 年级的选校与文书顾问</td></tr>
+          <tr><td><span class="pill p-a">不值得</span></td><td>背景提升套餐 · 买奖项 · 买科研 · 任何承诺产出成果的项目 · 私校学费（Gunn 的资源对得起这个学区）</td></tr>
+        </table>
+        <div class="warn" style="margin-top:10px"><b>给投入设上限要用「每周小时数」，不要用金额。</b>能力线每周不超过额外 2 小时；IP 项目每周不超过 5 小时。</div>
+      </div>
+    </div>
+    <details class="fold">
+      <summary>展开：资源清单（按优先级）</summary>
+      <div class="fb">
+        <table class="tight">
+          <tr><th style="width:92px">优先级</th><th style="width:200px">资源</th><th style="width:34%">用途</th><th>成本</th></tr>
+          <tr><td><span class="pill p-t">免费</span></td><td>Newsela / CommonLit</td><td>非虚构分级阅读，可调 Lexile，带批注</td><td>0</td></tr>
+          <tr><td><span class="pill p-t">免费</span></td><td>Khan Academy（英文界面）</td><td>学业补弱 + 数学术语英文化</td><td>0</td></tr>
+          <tr><td><span class="pill p-t">免费</span></td><td>Bluebook 全真模考 + 官方 SAT 练习</td><td>10 年级起的诊断与分 domain 补弱</td><td>0</td></tr>
+          <tr><td><span class="pill p-t">免费</span></td><td>AP Classroom + 历年 FRQ</td><td>AP 冲 5 分：考前 4–6 周集中刷</td><td>0（随课开通）</td></tr>
+          <tr><td><span class="pill p-bl">付费</span></td><td>AoPS Prealgebra / Introduction to Algebra</td><td>深度思维，每周 2–3 题即可</td><td>书费</td></tr>
+          <tr><td><span class="pill p-bl">付费</span></td><td>Procreate / Clip Studio + iPad 与笔</td><td>数字创作（已具备）</td><td>已投入</td></tr>
+          <tr><td><span class="pill p-bl">付费</span></td><td>1 对 1 数字艺术老师</td><td>把她从「自己瞎画」带到「有方法地画」</td><td>按小时</td></tr>
+          <tr><td><span class="pill p-bl">付费</span></td><td>短周期标化教练（8–12 周）</td><td>10 年级冲刺期针对弱项，<b>不要长期大班课</b></td><td>按小时</td></tr>
+          <tr><td><span class="pill p-a">不推荐</span></td><td>长期 SAT 大班课</td><td>她「最低标准完成」的习惯最容易在大班课上消化掉</td><td>—</td></tr>
+        </table>
+      </div>
+    </details>
+  </div>
+
+  <div class="panel" id="f3">
+    <h3>本学期执行清单</h3>
+    <p class="lead">勾选状态会保存在这台电脑的浏览器里。<b>本学期一次只推两件事</b>：① 把英语时间变成有效剂量 ② 周六上午锁定为 IP 主块。</p>
+    <div class="grid2">
+      <div class="card">
+        <h3>立刻做（本周内）</h3>
+        <div class="done"><input type="checkbox" id="t1"><label for="t1">把周二至周五的「英语 30 分钟」改成 35 分钟连续阅读<span>内容必须具体到书名，周三换成 Newsela 精读 + 批注</span></label></div>
+        <div class="done"><input type="checkbox" id="t2"><label for="t2">把周六上午排进日历：IP 主块 60–90 分钟<span>下午美术 + 武术不动，周日不排</span></label></div>
+        <div class="done"><input type="checkbox" id="t3"><label for="t3">问她一句：「要不要做一个你自己的角色？」<span>只问，不推动。她的反应本身就是最有价值的信号</span></label></div>
+        <div class="done"><input type="checkbox" id="t4"><label for="t4">启动每周 5 分钟做事日志<span>家长不看、不评分、不纠正。四年后喂那些召不回来的细节</span></label></div>
+        <div class="done"><input type="checkbox" id="t5"><label for="t5">把 43 个学习日做成贴墙格子图<span>可视化是让她自己当自己的观众</span></label></div>
+      </div>
+      <div class="card">
+        <h3>一个月内完成</h3>
+        <div class="done"><input type="checkbox" id="t6"><label for="t6">把家教内容改为：每周 2 次英语精读与写作反馈 + 1 次数学讲题<span>涉及合约或人情的话，先改内容、寒假再改时长</span></label></div>
+        <div class="done"><input type="checkbox" id="t7"><label for="t7">定一个发布阵地，连续更新 8 周<span>建议：家长共管、不露真人正脸与校名、这一年只发作品不发个人</span></label></div>
+        <div class="done"><input type="checkbox" id="t8"><label for="t8">核实湾区是否有 NFTE 与 YEA! 章节、TYE Silicon Valley 2027 招生要求<span>决定她 9–10 年级够不够得到最高层级</span></label></div>
+        <div class="done"><input type="checkbox" id="t9"><label for="t9">摸清这三条渠道：Acton 湾区场次、JA It's My Business!（6–8 年级）<span>先填报，不要等工作做完才报</span></label></div>
+        <div class="done"><input type="checkbox" id="t10"><label for="t10">与全家人谈一次：版权登记的公开信息风险<span>姓名 / 地址 / 出生年份公开后基本无法删除</span></label></div>
+        <div class="done"><input type="checkbox" id="t11"><label for="t11">11 月 AMC8 当作比赛体验，不设目标<span>18–20 分以上才值得加码竞赛线，否则果断撤</span></label></div>
+        <div class="done"><input type="checkbox" id="t12"><label for="t12">每月一次家庭复盘：只问「下周改哪一条流程」<span>只改流程，不改决心</span></label></div>
+      </div>
+    </div>
+    <div class="key" style="margin-top:12px"><b>本轮不做的事：</b>压缩家教时长、数学降量、赛事布局、SAT 备考。<b>能跑起来的计划，永远优于最优的计划。</b></div>
+  </div>
+</section>
+
+</div>
+<footer>
+  数据核实时点：2026 年 10 月。来源含加州 CDE 官方成绩报告（2026 年春，六年级，Palo Alto Unified — Jane Lathrop Stanford Middle）、College Board 与 Common App 公告、各校招生政策、美国版权局与 USPTO、加州 CDTFA、IRS 自雇税规则、各赛事官网。<br>
+  <b>复查提醒：</b>标化政策、申请规则、各赛事年龄与费用每年都在变，<b>每一学年开始时应逐项重新核实</b>，尤其是 NFTE / YEA / TYE 的湾区章节是否存在。
+</footer>
+<script>
+(function(){
+  // ---- 二级导航：自动生成各 Zone 下的小节 ----
+  var n2 = document.getElementById('nav2');
+  document.querySelectorAll('section[data-zone]').forEach(function(sec){
+    var id = sec.id;
+    sec.querySelectorAll('.panel[id]').forEach(function(p){
+      var label = p.querySelector('h3');
+      if(!label) return;
+      var a = document.createElement('a');
+      a.href = '#' + p.id;
+      a.textContent = id + '·' + label.textContent.trim().replace(/[（(].*?[)）]/g,'');
+      n2.appendChild(a);
+    });
+  });
+
+  // ---- 滚动高亮 ----
+  var links = Array.prototype.slice.call(document.querySelectorAll('#nav1 a, #nav2 a'));
+  var targets = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function sync(){
+    var y = window.scrollY + 150;
+    var idx = -1;
+    targets.forEach(function(t,i){ if(t && t.offsetTop <= y) idx = i; });
+    links.forEach(function(a){ a.classList.remove('on'); });
+    // 主导航：按当前所在的 Zone
+    var cur = null;
+    document.querySelectorAll('section[data-zone]').forEach(function(sec){
+      if(sec.offsetTop <= y) cur = sec.id;
+    });
+    var main = document.querySelector('#nav1 a[href="#' + cur + '"]');
+    if(main) main.classList.add('on');
+    if(idx >= 0) links[idx].classList.add('on');
+  }
+  window.addEventListener('scroll', sync, {passive:true});
+  window.addEventListener('resize', sync);
+  sync();
+
+  // ---- 勾选状态本地保存 ----
+  document.querySelectorAll('input[type=checkbox]').forEach(function(cb){
+    var key = 'tt_' + cb.id;
+    if(localStorage.getItem(key) === '1'){ cb.checked = true; cb.closest('.done').classList.add('d'); }
+    cb.addEventListener('change', function(){
+      localStorage.setItem(key, cb.checked ? '1' : '0');
+      cb.closest('.done').classList.toggle('d', cb.checked);
+    });
+  });
+})();
+</script>
+</body>
+</html>
